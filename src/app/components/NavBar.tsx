@@ -21,7 +21,7 @@ export default function NavBar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-white">
-              YourName<span className="text-purple-500">.</span>_
+              MOSS VICTOR<span className="text-purple-500">.</span>_
             </Link>
           </div>
 
@@ -62,14 +62,14 @@ export default function NavBar() {
 
       {/* Mobile menu dropdown */}
       {isOpen && (
-        <div id="mobile-menu" className="md:hidden">
+        <div id="mobile-menu" className="md:hidden bg-[#001022]/95 backdrop-blur-md border-t border-gray-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {menuItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)} // Close on click
-                className="block px-3 py-2 text-base font-medium text-gray-400 hover:text-white hover:bg-gray-800 rounded-md"
+                className="block px-3 py-2 text-base font-bold text-gray-400 hover:text-white rounded-md"
               >
                 {item.label}
               </Link>

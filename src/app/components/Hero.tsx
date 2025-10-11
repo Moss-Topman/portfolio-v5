@@ -70,8 +70,21 @@ export default function Hero() {
         </Canvas>
       </div>
 
-      {/* Text Overlay - keep as is */}
+      {/* Poster fallback for LCP - uncomment if needed and file exists */}
+      {/* <Image src="/assets/hero-poster.jpg" alt="Hero background" fill priority className="object-cover" /> */}
 
+      {/* Text Overlay */}
+      <div className="relative z-10 text-center px-4">
+        <h1 className="text-6xl md:text-9xl font-bold uppercase tracking-wider">MOSS VICTOR</h1>
+        <p className="text-lg md:text-2xl text-gray-400 mt-4 font-bold">SOFTWARE ENGINEER,  AI PROMPT ENGINEER,  FRONT END &   APP DEVELOPER </p>
+        <div className="mt-8 flex justify-center space-x-4">
+          {/* Featured logos - add images later */}
+          <p className="text-gray-500">As featured in: Logo1 Logo2 Logo3</p>
+        </div>
+        <div className="mt-8 animate-bounce">
+          <a href="#expertise" className="text-white text-2xl">↓</a>
+        </div>
+      </div>
     </section>
   );
 }
