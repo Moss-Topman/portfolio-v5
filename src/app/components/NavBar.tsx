@@ -21,7 +21,7 @@ export default function NavBar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-white">
-              MOSS VICTOR<span className="text-purple-500">.</span>_
+              MOSS VICTOR<span className="text-orange-500">.</span>_
             </Link>
           </div>
 
@@ -31,7 +31,7 @@ export default function NavBar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-400 hover:text-white transition-colors text-sm uppercase tracking-wide"
+                className="text-gray-400 hover:text-orange-500 transition-colors text-sm uppercase tracking-wide"
               >
                 {item.label}
               </Link>
@@ -44,7 +44,7 @@ export default function NavBar() {
               onClick={() => setIsOpen(!isOpen)}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
-              className="text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="text-gray-400 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
             >
               <span className="sr-only">Open main menu</span>
               {/* Hamburger icon - use SVG or Tailwind */}
@@ -69,7 +69,7 @@ export default function NavBar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)} // Close on click
-                className="block px-3 py-2 text-base font-bold text-gray-400 hover:text-white rounded-md"
+                className="block px-3 py-2 text-base font-bold text-gray-400 hover:text-orange-500 rounded-md font-harlow"
               >
                 {item.label}
               </Link>
