@@ -69,7 +69,7 @@ export default function NavBar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)} // Close on click
-                className="block px-3 py-2 text-base font-bold text-gray-400 hover:text-orange-500 rounded-md font-harlow"
+                className="block px-3 py-2 text-base font-bold text-gray-400 hover:text-orange-500 rounded-md"
               >
                 {item.label}
               </Link>

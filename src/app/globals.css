@@ -1,15 +1,13 @@
-@import url('https://fonts.cdnfonts.com/css/harlow-solid-italic');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-[#0a0a0f] text-white antialiased; /* Dark theme from earlier */
+  @apply bg-[#0a0a0f] text-white antialiased; /* Dark theme */
 }
 
 html {
-  scroll-behavior: smooth; /* From Step 3 */
+  scroll-behavior: smooth; /* Smooth scroll */
 }
 
 .code-bg {
@@ -17,5 +15,5 @@ html {
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
-  opacity: 0.1; /* From previous changes */
+  opacity: 0.1; /* Subtle code bg */
 }
