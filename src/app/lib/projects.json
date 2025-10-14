@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "project-1",
+    "title": "Project 1",
+    "description": "Short description for grid card.",
+    "image": "/assets/project-1.jpg",
+    "details": "Full case study text here. Add paragraphs, images, tech stack, etc."
+  },
+  {
+    "slug": "project-2",
+    "title": "Project 2",
+    "description": "Short description for grid card.",
+    "image": "/assets/project-2.jpg",
+    "details": "Full case study text here. Add paragraphs, images, tech stack, etc."
+  },
+  {
+    "slug": "project-3",
+    "title": "Project 3",
+    "description": "Short description for grid card.",
+    "image": "/assets/project-3.jpg",
+    "details": "Full case study text here. Add paragraphs, images, tech stack, etc."
+  }
+]

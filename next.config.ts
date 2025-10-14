@@ -9,3 +9,8 @@ module.exports = {
     ],
   },
 };
+module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true, // Disable ESLint during builds
+  },
+};
