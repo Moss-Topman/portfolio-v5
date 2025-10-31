@@ -3,17 +3,36 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[#0a0a0f] text-white antialiased; /* Dark theme */
+  @apply bg-black text-white antialiased; /* Pure black background */
 }
 
 html {
   scroll-behavior: smooth; /* Smooth scroll */
 }
 
+/* Dot pattern background like tamalsen.dev */
+.dot-background {
+  background-color: #000000;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+:root {
+  /* Adjustable variable for hero cut color */
+  --hero-cut-color: #252629;
+}
+body {
+  @apply bg-[#252529] text-white antialiased; /* Unified dark gray bg */
+}
+
+/* Remove or comment out the code-bg styles since we're using dot pattern */
+/*
 .code-bg {
   background-image: url('/assets/code-bg.jpg');
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
-  opacity: 0.1; /* Subtle code bg */
+  opacity: 0.1;
 }
+*/

@@ -1,76 +1,87 @@
-"use client"; // Client for 3D and animation
-
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
-import { useRef } from "react";
 import Image from "next/image";
 
-function Cube({ position }: { position: [number, number, number] }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.01; // Very slow rotation
-      meshRef.current.rotation.y += delta * 0.01;
-      meshRef.current.position.y += Math.sin(state.clock.elapsedTime + position[0]) * 0.0005; // Subtler float
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={position}>
-      <boxGeometry args={[0.8, 0.8, 0.8]} /> {/* Low-poly */}
-      <meshPhysicalMaterial color="#8b4513" roughness={0.5} metalness={0.2} /> {/* Brownish shine */}
-    </mesh>
-  );
-}
-
-function Orb() {
-  return (
-    <mesh position={[0.5, 0, -2]}>
-      <sphereGeometry args={[0.4, 32, 32]} />
-      <meshStandardMaterial color="#ff7f50" emissive="#ff7f50" emissiveIntensity={2} /> {/* Pink-orange glow */}
-    </mesh>
-  );
-}
-
-function Scene() {
-  return (
-    <>
-      <color attach="background" args={['#001022']} /> {/* Navy bg */}
-      <ambientLight intensity={0.3} />
-      <directionalLight intensity={1} position={[5, 5, 5]} color="#ffffff" /> {/* Overall light */}
-      <pointLight position={[0.5, 0, -2]} intensity={5} color="#ff7f50" /> {/* Orb light */}
-      <Orb />
-      {/* Minimal cubes for perf */}
-      <Cube position={[-0.5, 1, -3]} />
-      <Cube position={[1, -0.5, -2.5]} />
-    </>
-  );
-}
+const svgMask = encodeURIComponent(`
+  <svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'>
+    <defs>
+      <linearGradient id='fade' x1='0' x2='0' y1='0' y2='1'>
+        <stop offset='55%' stop-color='white' />
+        <stop offset='85%' stop-color='black' />
+      </linearGradient>
+    </defs>
+    <rect width='100' height='100' fill='url(#fade)'/>
+  </svg>
+`);
 
 export default function Hero() {
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Poster for fast LCP (download dark navy jpg to public/assets/hero-poster.jpg) */}
-      <Image src="/assets/hero-poster.jpg" alt="Hero background" fill priority className="object-cover" />
-      {/* 3D Background (loads after poster, minimal for no heaviness) */}
-      <div className="absolute inset-0 z-0">
-        <Canvas dpr={[1, 1]} gl={{ antialias: false }} camera={{ position: [0, 0, 5], fov: 50 }}>
-          <Scene />
-        </Canvas>
+      { /* Multiple gradient layers for precise control */ }
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: `
+            /* Dark overlay for entire image */
+            linear-gradient(rgba(26, 25, 29, 0.3), rgba(26, 25, 29, 0.3)),
+            /* Bottom fade */
+            linear-gradient(to bottom, transparent 60%, #1A191D 100%),
+            /* Hero image */
+            url('/assets/hero-poster.jpg')
+          `,
+          backgroundSize: 'cover, cover, cover',
+          backgroundPosition: 'center, center, center',
+          backgroundBlendMode: 'normal, normal, normal'
+        }}
+      >
+        <Image
+          src="/assets/hero-poster.jpg"
+          alt="Hero background"
+          fill
+          priority
+          className="object-cover"
+        />
       </div>
-      {/* Text Overlay */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#252529] to-transparent" /> { /* Bottom gradient blend to #252529 */ }
+
+      
+
+      { /* Your content */ }
       <div className="relative z-10 text-center px-4">
-        <h1 className="text-6xl md:text-9xl font-bold uppercase tracking-wider">MOSS VICTOR</h1>
-        <p className="text-lg md:text-2xl text-gray-400 mt-4 font-bold">Software Engineer AI Prompt Engineer Front End App Developer</p>
-        <div className="mt-8 flex justify-center space-x-4">
-          {/* Featured logos - add images later */}
-          <p className="text-gray-500">As featured in: Logo1 Logo2 Logo3</p>
-        </div>
-        <div className="mt-8 animate-bounce">
-          <a href="#expertise" className="text-white text-2xl">↓</a>
+        {/* Your text content */}
+      </div>
+    
+
+      {/* Hero content */}
+      <div className="relative z-20 text-center px-4">
+        <h1 className="text-6xl md:text-9xl font-bold uppercase tracking-wider text-white">
+          Moss Victor
+        </h1>
+        <p className="text-lg md:text-2xl text-gray-300 mt-4 font-semibold">
+          Software Engineer · AI Prompt Engineer · Frontend Developer
+        </p>
+
+        {/* Floating mouse scroll indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2">
+          <div className="w-[30px] h-[50px] border-2 border-gray-400 rounded-full flex justify-center">
+            <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 animate-bounce"></div>
+          </div>
+          <span className="text-gray-400 text-sm tracking-widest">Scroll</span>
         </div>
       </div>
+
+      {/* Manual blend edge — no color transitions */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-30"
+        style={{
+          background: `
+            linear-gradient(
+              to bottom,
+              rgba(37, 38, 41, 0) 0%,
+              var(--hero-cut-color, #252629) 100%
+            )
+          `,
+        }}
+      />
     </section>
   );
 }
