@@ -3,10 +3,10 @@ import Link from "next/link";
 export default function NavBar() {
   return (
     <div className="fixed top-0 left-0 w-full z-50 flex flex-col md:flex-row justify-between items-center p-4 text-white">
-      {/* Top-left Moss Victor_ */}
-      <div className="text-xl md:text-2xl font-bold mb-4 md:mb-0 md:absolute md:left-8">
-        Moss Victor_
-      </div>
+      { /* Top-left Moss Victor_ with lemon green and Christmas font */ }
+<div className="text-xl md:text-2xl font-bold mb-4 md:mb-0 md:absolute md:left-8 font-christmas text-[#d4ed31]">
+  Moss Victor_
+</div>
       
       {/* Centered numbered sections - moved 150px right */}
       <div className="flex flex-col items-center translate-x-[500px]">

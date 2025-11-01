@@ -15,40 +15,36 @@ const svgMask = encodeURIComponent(`
 export default function Hero() {
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      { /* Multiple gradient layers for precise control */ }
-      <div 
+      {/* Background layers */}
+      <div
         className="absolute inset-0 z-0"
         style={{
-          background: `
-            /* Dark overlay for entire image */
-            linear-gradient(rgba(26, 25, 29, 0.3), rgba(26, 25, 29, 0.3)),
-            /* Bottom fade */
-            linear-gradient(to bottom, transparent 60%, #1A191D 100%),
-            /* Hero image */
-            url('/assets/hero-poster.jpg')
-          `,
+          background: `linear-gradient(rgba(26, 25, 29, 0.3), rgba(26, 25, 29, 0.3)), linear-gradient(to bottom, transparent 60%, #1A191D 100%), url('/assets/hero-poster.jpg')`,
           backgroundSize: 'cover, cover, cover',
           backgroundPosition: 'center, center, center',
-          backgroundBlendMode: 'normal, normal, normal'
+          backgroundBlendMode: 'normal, normal, normal',
         }}
-      >
-        <Image
-          src="/assets/hero-poster.jpg"
-          alt="Hero background"
-          fill
-          priority
-          className="object-cover"
-        />
-      </div>
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#252529] to-transparent" /> { /* Bottom gradient blend to #252529 */ }
+      />
 
-      
+      {/* Hero image */}
+     <Image
+  src="/assets/hero-poster.jpg"
+  alt="Hero background"
+  fill
+  priority
+  unoptimized
+  className="object-cover"
+  quality={100}
+  sizes="100vw"
+/>
 
-      { /* Your content */ }
+      {/* Bottom gradient */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#252529] to-transparent" />
+
+      {/* Content wrapper */}
       <div className="relative z-10 text-center px-4">
-        {/* Your text content */}
+        {/* Optional content */}
       </div>
-    
 
       {/* Hero content */}
       <div className="relative z-20 text-center px-4">
@@ -59,7 +55,7 @@ export default function Hero() {
           Software Engineer · AI Prompt Engineer · Frontend Developer
         </p>
 
-        {/* Floating mouse scroll indicator */}
+        {/* Scroll indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2">
           <div className="w-[30px] h-[50px] border-2 border-gray-400 rounded-full flex justify-center">
             <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 animate-bounce"></div>
@@ -68,18 +64,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Manual blend edge — no color transitions */}
+      {/* Manual blend edge */}
       <div
         aria-hidden
         className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-30"
         style={{
-          background: `
-            linear-gradient(
-              to bottom,
-              rgba(37, 38, 41, 0) 0%,
-              var(--hero-cut-color, #252629) 100%
-            )
-          `,
+          background: 'linear-gradient(to bottom, rgba(37, 38, 41, 0) 0%, var(--hero-cut-color, #252629) 100%)',
         }}
       />
     </section>
