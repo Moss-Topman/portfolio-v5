@@ -1,5 +1,5 @@
-module.exports = {
-  // Optional: Add if needed for images/optimizations
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -7,10 +7,11 @@ module.exports = {
         hostname: '**', // Allow all for now; restrict later
       },
     ],
+    quality: [100], // Add this to support quality=100 in <Image />
   },
-};
-module.exports = {
   eslint: {
     ignoreDuringBuilds: true, // Disable ESLint during builds
   },
 };
+
+module.exports = nextConfig;
