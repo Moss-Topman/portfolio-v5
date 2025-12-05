@@ -31,3 +31,566 @@ html {
   opacity: 0.1;
 }
 */
+/* Add to your globals.css or tailwind.config.js */
+@keyframes rotate-3d {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-rotate-3d {
+  animation: rotate-3d 20s infinite linear;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.laptop-container {
+  transform-style: preserve-3d;
+}
+
+.laptop-screen {
+  width: 400px;
+  height: 250px;
+  transform: rotateX(10deg);
+}
+
+.laptop-base {
+  width: 450px;
+  height: 20px;
+}
+
+.laptop-preview {
+  transform-style: preserve-3d;
+}
+
+/* 3D Laptop Animations and Effects */
+.laptop-preview-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: translateZ(0);
+}
+
+.laptop-screen-3d {
+  transform: 
+    perspective(1000px) 
+    rotateX(5deg) 
+    translateZ(50px);
+  transform-style: preserve-3d;
+  border-image: linear-gradient(45deg, #4b5563, #1f2937, #4b5563) 1;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.laptop-base-3d {
+  transform: 
+    perspective(1000px) 
+    rotateX(-2deg) 
+    translateZ(0px);
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.laptop-hinge {
+  transform: perspective(1000px) rotateX(15deg);
+  background: linear-gradient(135deg, #374151 0%, #111827 50%, #374151 100%);
+}
+
+/* Enhanced 3D Floating Animation */
+@keyframes float3d {
+  0%, 100% { 
+    transform: 
+      perspective(1000px) 
+      rotateY(0deg) 
+      rotateX(5deg) 
+      translateY(0px) 
+      translateZ(0px);
+  }
+  25% { 
+    transform: 
+      perspective(1000px) 
+      rotateY(2deg) 
+      rotateX(3deg) 
+      translateY(-10px) 
+      translateZ(10px);
+  }
+  50% { 
+    transform: 
+      perspective(1000px) 
+      rotateY(0deg) 
+      rotateX(5deg) 
+      translateY(-20px) 
+      translateZ(20px);
+  }
+  75% { 
+    transform: 
+      perspective(1000px) 
+      rotateY(-2deg) 
+      rotateX(3deg) 
+      translateY(-10px) 
+      translateZ(10px);
+  }
+}
+
+.animate-float-3d {
+  animation: float3d 8s ease-in-out infinite;
+}
+
+/* Screen Glow Effect */
+.screen-content-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Apple 3D Laptop Styles */
+.laptop-container-3d {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+.apple-laptop-3d {
+  transform-style: preserve-3d;
+  position: relative;
+  width: 400px;
+  height: 280px;
+}
+
+/* Screen Container */
+.apple-screen-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+  width: 360px;
+  height: 225px;
+}
+
+.apple-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid #333;
+  overflow: hidden;
+  position: relative;
+  transform: rotateX(-75deg);
+  transform-origin: bottom;
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.3),
+    inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.screen-content-apple {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #1d1d1f;
+}
+
+/* macOS Menu Bar */
+.macos-menu-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.menu-left {
+  display: flex;
+  gap: 6px;
+}
+
+.menu-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.menu-center {
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.menu-right {
+  color: #1d1d1f;
+}
+
+/* Screen Back */
+.apple-screen-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+  border-radius: 12px;
+  transform: translateZ(-2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.apple-logo {
+  font-size: 48px;
+  color: #999;
+  font-weight: 300;
+}
+
+/* Left Edge - Visible during rotation */
+.apple-left-edge {
+  position: absolute;
+  left: -8px;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(90deg, #8a8a8a, #a8a8a8, #8a8a8a);
+  transform: rotateY(90deg) translateZ(4px);
+  border-radius: 2px 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.left-edge-ports {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.port {
+  width: 4px;
+  height: 12px;
+  background: #333;
+  border-radius: 1px;
+}
+
+.port.usb-c {
+  background: #007aff;
+}
+
+.port.magsafe {
+  background: #ff9500;
+  width: 6px;
+}
+
+/* Base Container */
+.apple-base-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+  width: 400px;
+  height: 200px;
+}
+
+.apple-base {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* Apple Keyboard */
+.apple-keyboard {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 50px;
+  background: #000;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.keyboard-top-row {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.function-key {
+  flex: 1;
+  height: 16px;
+  background: #333;
+  border-radius: 2px;
+  font-size: 8px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard-main-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.key-row {
+  display: flex;
+  gap: 2px;
+}
+
+.key-row-bottom {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.key {
+  flex: 1;
+  height: 20px;
+  background: #1a1a1a;
+  border-radius: 3px;
+  font-size: 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 0 #333;
+}
+
+.key.special {
+  flex: 1.5;
+  font-size: 8px;
+  color: #999;
+}
+
+.key-spacebar {
+  flex: 6;
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+.key-arrow {
+  font-size: 12px;
+}
+
+/* Trackpad */
+.apple-trackpad {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 80px;
+  background: #000;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px #333;
+}
+
+/* Bottom Edge */
+.apple-bottom-edge {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.bottom-text {
+  font-size: 10px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Base Left Edge */
+.apple-base-left-edge {
+  position: absolute;
+  left: -8px;
+  bottom: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(90deg, #8a8a8a, #a8a8a8, #8a8a8a);
+  transform: rotateY(90deg) translateZ(4px);
+  border-radius: 2px 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.base-ports {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.port.hdmi {
+  background: #ff3b30;
+  height: 8px;
+}
+
+.port.sd-card {
+  background: #4cd964;
+  height: 6px;
+}
+
+.port.headphone {
+  background: #007aff;
+  height: 6px;
+}
+
+/* 3D Rotation Animation */
+@keyframes appleRotate3D {
+  0% {
+    transform: 
+      rotateY(0deg) 
+      rotateX(-10deg)
+      translateZ(0);
+  }
+  25% {
+    transform: 
+      rotateY(-45deg) 
+      rotateX(-10deg)
+      translateZ(50px);
+  }
+  50% {
+    transform: 
+      rotateY(-90deg) 
+      rotateX(-5deg)
+      translateZ(100px);
+  }
+  75% {
+    transform: 
+      rotateY(-135deg) 
+      rotateX(-10deg)
+      translateZ(50px);
+  }
+  100% {
+    transform: 
+      rotateY(-180deg) 
+      rotateX(-10deg)
+      translateZ(0);
+  }
+}
+
+.animate-apple-rotate {
+  animation: appleRotate3D 20s ease-in-out infinite;
+}
+
+/* Hover Pause */
+.apple-laptop-3d:hover {
+  animation-play-state: paused;
+}
+
+/* Responsive Scaling */
+@media (max-width: 768px) {
+  .apple-laptop-3d {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 640px) {
+  .apple-laptop-3d {
+    transform: scale(0.6);
+  }
+}
+
+/* Enhanced 3D Effects */
+.apple-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.apple-base::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.2) 0%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0.2) 100%
+  );
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+
+
+/* Custom Cursor for Project Pages */
+.cursor-none {
+  cursor: none;
+}
+
+/* Back Arrow Hover Effect for Custom Cursor */
+#back-arrow:hover ~ .custom-cursor {
+  transform: scale(3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#back-arrow:hover ~ .custom-cursor::after {
+  content: "Back";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}

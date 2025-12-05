@@ -1,23 +1,103 @@
 [
   {
-    "slug": "project-1",
-    "title": "Project 1",
-    "description": "Short description for grid card.",
-    "image": "/assets/project-1.jpg",
-    "details": "Full case study text here. Add paragraphs, images, tech stack, etc."
+    "slug": "trend-following-strategy",
+    "title": "Trend Following Strategy",
+    "description": "Developed a trend-following trading strategy that generates Buy and Sell signals using EMA crossovers and RSI. This system identifies market trends and executes trades based on confirmed momentum signals.",
+    "image": "/assets/trading-strategy-1.png",
+    "coreLogic": [
+      {
+        "phase": "Phase 1: Trend Detection (EMA Crossover)",
+        "details": [
+          "Fast EMA → 20",
+          "Slow EMA → 50",
+          "Buy setup when EMA 20 crosses ABOVE EMA 50",
+          "Sell setup when EMA 20 crosses BELOW EMA 50",
+          "This tells us the direction of the trend"
+        ]
+      },
+      {
+        "phase": "Phase 2: Momentum Filter (RSI)",
+        "details": [
+          "Uses RSI to avoid weak markets",
+          "For Buy: RSI must be above 50",
+          "For Sell: RSI must be below 50",
+          "This confirms strength in the move"
+        ]
+      },
+      {
+        "phase": "Phase 3: Cooldown & Entry Logic",
+        "details": [
+          "Anti-overtrading cooldown period",
+          "Waits X candles after trade closes",
+          "Prevents revenge trading and chop losses",
+          "Entry when all conditions match: trend confirmed, RSI agrees, cooldown complete"
+        ]
+      }
+    ],
+    "nextProject": "trend-rider"
   },
   {
-    "slug": "project-2",
-    "title": "Project 2",
-    "description": "Short description for grid card.",
-    "image": "/assets/project-2.jpg",
-    "details": "Full case study text here. Add paragraphs, images, tech stack, etc."
+    "slug": "trend-rider",
+    "title": "Trend Rider",
+    "description": "Advanced trend following system with enhanced momentum detection and risk management features. Built with Python and data analysis libraries for precise market analysis.",
+    "image": "/assets/trading-strategy-2.png",
+    "coreLogic": [
+      {
+        "phase": "Phase 1: Enhanced Trend Analysis",
+        "details": [
+          "Multiple EMA timeframe analysis",
+          "Volume confirmation for trend strength",
+          "Support and resistance level integration",
+          "Advanced trend line detection"
+        ]
+      },
+      {
+        "phase": "Phase 2: Momentum Confirmation",
+        "details": [
+          "Multi-timeframe RSI convergence",
+          "MACD histogram analysis",
+          "Volume-weighted price action",
+          "Momentum divergence detection"
+        ]
+      }
+    ],
+    "nextProject": "trend-rider-v2"
   },
   {
-    "slug": "project-3",
-    "title": "Project 3",
-    "description": "Short description for grid card.",
-    "image": "/assets/project-3.jpg",
-    "details": "Full case study text here. Add paragraphs, images, tech stack, etc."
+    "slug": "trend-rider-v2",
+    "title": "v2.2",
+    "description": "Latest version with improved cooldown mechanisms and entry optimization. Features enhanced backtesting capabilities and real-time performance monitoring.",
+    "image": "/assets/trading-strategy-3.png",
+    "coreLogic": [
+      {
+        "phase": "Phase 1: Trend Detection (EMA Crossover)",
+        "details": [
+          "Fast EMA → 20",
+          "Slow EMA → 50",
+          "Buy setup when EMA 20 crosses ABOVE EMA 50",
+          "Sell setup when EMA 20 crosses BELOW EMA 50",
+          "This tells us the direction of the trend"
+        ]
+      },
+      {
+        "phase": "Phase 2: Momentum Filter (RSI)",
+        "details": [
+          "Uses RSI to avoid weak markets",
+          "For Buy: RSI must be above 50",
+          "For Sell: RSI must be below 50",
+          "This confirms strength in the move"
+        ]
+      },
+      {
+        "phase": "Phase 3: Cooldown & Entry Logic",
+        "details": [
+          "Anti-overtrading cooldown period",
+          "Waits X candles after trade closes",
+          "Prevents revenge trading and chop losses",
+          "Entry when all conditions match: trend confirmed, RSI agrees, cooldown complete"
+        ]
+      }
+    ],
+    "nextProject": "trend-following-strategy"
   }
 ]

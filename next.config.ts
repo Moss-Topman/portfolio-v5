@@ -1,16 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    qualities: [75, 100],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // Allow all for now; restrict later
+        hostname: '**',
       },
     ],
-    quality: [100], // Add this to support quality=100 in <Image />
   },
   eslint: {
-    ignoreDuringBuilds: true, // Disable ESLint during builds
+    ignoreDuringBuilds: true,
   },
 };
 

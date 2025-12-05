@@ -14,3 +14,46 @@ module.exports = {
   },
   plugins: [],
 };
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      animation: {
+        'float-3d': 'float3d 8s ease-in-out infinite',
+      },
+      transformStyle: {
+        '3d': 'preserve-3d',
+      },
+      backfaceVisibility: {
+        'hidden': 'hidden',
+      },
+      perspective: {
+        '1000': '1000px',
+      },
+    },
+  },
+  plugins: [],
+}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
