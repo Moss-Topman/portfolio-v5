@@ -7,9 +7,9 @@ export default function MyWork() {
    <section id="work" className="py-20 px-4 min-h-[150vh] bg-[#252529]">
       {/* Big Bold MY WORK Header */}
       <div className="flex justify-start">
-        <h1 className="text-[120px] font-black text-white opacity-90 leading-none tracking-tight transform translate-x-[180px]">
+        <h2 className="elementor-heading-title fancy-heading font-poppins text-[120px] font-black opacity-90 leading-none tracking-tight transform translate-x-[180px]">
           MY<br />WORK
-        </h1>
+        </h2>
       </div>
 
       {/* 

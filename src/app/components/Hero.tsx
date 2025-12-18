@@ -15,138 +15,16 @@ const svgMask = encodeURIComponent(`
   </svg>
 `);
 
-interface MousePosition {
-  x: number;
-  y: number;
-}
-
-interface DotOffset {
-  x: number;
-  y: number;
-}
-
 export default function Hero() {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
-  const [dotOffset, setDotOffset] = useState<DotOffset>({ x: 0, y: 0 });
   const [isClient, setIsClient] = useState(false);
-  const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const lastMousePosition = useRef({ x: 0, y: 0 });
-  const animationFrameRef = useRef<number>();
-  const lastUpdateTime = useRef<number>(0);
 
   // Set client-side flag
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  // 🔥 ANALOG-STYLE MOUSE TRACKING
-  useEffect(() => {
-    if (!isClient) return;
-    
-    const mouseMove = (e: MouseEvent) => {
-      const newMousePosition = {
-        x: e.clientX,
-        y: e.clientY
-      };
-      
-      // Calculate velocity
-      const deltaX = newMousePosition.x - lastMousePosition.current.x;
-      const deltaY = newMousePosition.y - lastMousePosition.current.y;
-      
-      // Update velocity with smoothing
-      setVelocity(prev => ({
-        x: prev.x * 0.3 + deltaX * 0.7,
-        y: prev.y * 0.3 + deltaY * 0.7
-      }));
-      
-      setMousePosition(newMousePosition);
-      lastMousePosition.current = newMousePosition;
-      lastUpdateTime.current = Date.now();
-    };
-    
-    window.addEventListener("mousemove", mouseMove);
-    return () => {
-      window.removeEventListener("mousemove", mouseMove);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [isClient]);
-
-  // 🔥 ANALOG PHYSICS ANIMATION LOOP
-  useEffect(() => {
-    if (!isClient) return;
-    
-    const updateDotPosition = () => {
-      const currentTime = Date.now();
-      const timeSinceLastMove = currentTime - lastUpdateTime.current;
-      
-      setDotOffset(prev => {
-        let newX = prev.x;
-        let newY = prev.y;
-        
-        // Apply velocity
-        newX += velocity.x * 0.4;
-        newY += velocity.y * 0.4;
-        
-        // Spring force pulling back to center
-        const springStrength = 0.25;
-        const damping = 0.82;
-        
-        // Calculate distance from center
-        const distanceFromCenter = Math.sqrt(newX * newX + newY * newY);
-        
-        if (distanceFromCenter > 0) {
-          // Spring force (stronger when further from center)
-          const springForce = -newX * springStrength;
-          const springForceY = -newY * springStrength;
-          
-          newX += springForce;
-          newY += springForceY;
-          
-          // Apply damping
-          newX *= damping;
-          newY *= damping;
-        }
-        
-        // Boundary constraints
-        const maxDistance = 9;
-        const newDistance = Math.sqrt(newX * newX + newY * newY);
-        
-        if (newDistance > maxDistance) {
-          const angle = Math.atan2(newY, newX);
-          newX = Math.cos(angle) * maxDistance;
-          newY = Math.sin(angle) * maxDistance;
-        }
-        
-        // Snap to center if idle and close
-        if (timeSinceLastMove > 300 && newDistance < 0.3) {
-          return { x: 0, y: 0 };
-        }
-        
-        // Decay velocity
-        setVelocity(prev => ({
-          x: prev.x * 0.88,
-          y: prev.y * 0.88
-        }));
-        
-        return { x: newX, y: newY };
-      });
-      
-      animationFrameRef.current = requestAnimationFrame(updateDotPosition);
-    };
-    
-    animationFrameRef.current = requestAnimationFrame(updateDotPosition);
-    
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [isClient, velocity]);
 
   // Scroll tracking
   useEffect(() => {
@@ -227,38 +105,8 @@ export default function Hero() {
     <motion.section
       ref={heroRef}
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden cursor-none"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* 🔥 ANALOG-STYLE CURSOR */}
-      {isClient && (
-        <div
-          className="cursor-circle fixed pointer-events-none z-50"
-          style={{
-            left: `${mousePosition.x}px`,
-            top: `${mousePosition.y}px`,
-            transform: 'translate(-50%, -50%)',
-          }}
-        >
-          <div 
-            className="border border-purple-400/70 rounded-full relative"
-            style={{
-              width: '25px',
-              height: '25px',
-            }}
-          >
-            <div
-              className="absolute w-1.5 h-1.5 bg-purple-400 rounded-full"
-              style={{
-                left: '50%',
-                top: '50%',
-                transform: `translate(${dotOffset.x}px, ${dotOffset.y}px)`,
-                transition: 'transform 0.05s linear',
-              }}
-            />
-          </div>
-        </div>
-      )}
-
       {/* Rest of your hero section remains exactly the same... */}
       {/* Parallax Background Layer */}
       <motion.div
@@ -268,7 +116,7 @@ export default function Hero() {
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(rgba(26, 25, 29, 0.3), rgba(26, 25, 29, 0.3)), linear-gradient(to bottom, transparent 60%, #1A191D 100%), url('/assets/hero-poster.jpg')`,
+            background: `linear-gradient(rgba(26, 25, 29, 0.3), rgba(26, 25, 29, 0.3)), linear-gradient(to bottom, transparent 60%, #252529 100%), url('/assets/hero-poster.jpg')`,
             backgroundSize: 'cover, cover, cover',
             backgroundPosition: 'center, center, center',
             backgroundBlendMode: 'normal, normal, normal',
@@ -293,7 +141,7 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* Bottom gradient */}
+      {/* Bottom gradient overlay fading into the Expertise section color (#252529) */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#252529] to-transparent z-10" />
 
       {/* Main Content */}
@@ -313,7 +161,7 @@ export default function Hero() {
         </motion.h1>
       
         <motion.p
-          className="text-white-400 text-center mb-6 text-sm tracking-widest uppercase translate-y-12"
+          className="text-gray-400 text-center mb-6 text-sm tracking-widest uppercase"
           variants={itemVariants}
         >
           <motion.span className="mr-4" whileHover={{ scale: 1.05 }}>SOFTWARE</motion.span>
@@ -327,11 +175,11 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-12 translate-y-16"
+          className="mt-12 translate-y-16 group"
           variants={itemVariants}
         >
           <motion.p
-            className="text-xl md:text-2xl text-white mt-2 font-semibold font-['Poppins'] uppercase translate-y-2"
+            className="text-xl md:text-2xl text-white mt-2 font-semibold font-['Poppins'] uppercase translate-y-2 opacity-30 group-hover:opacity-100 transition-opacity duration-200"
           >
             <span className="mr-4">AS</span>
             <span className="mr-4">FEATURED</span>
@@ -353,7 +201,7 @@ export default function Hero() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 text-lg font-semibold hover:text-white transition-colors"
+                className="text-gray-400 text-lg font-semibold hover:text-white transition-colors opacity-30 group-hover:opacity-100 transition-opacity duration-200"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -375,56 +223,53 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Enhanced Scroll Indicator */}
+      {/* Enhanced Scroll Indicator - static in hero section only */}
       <motion.div
-        className={`fixed bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 z-40 ${
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 z-40 ${
           showScrollIndicator ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
-        onClick={scrollToNextSection}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
       >
+        {/* Old structure: rounded tall container holding the two redesigned elements */}
         <motion.div
-          className="w-6 h-10 border border-gray-400 rounded-full flex justify-center items-start pt-2 cursor-pointer"
-          animate={{
-            borderColor: ["rgb(156 163 175)", "rgb(192 132 252)", "rgb(156 163 175)"],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          whileHover={{
-            scale: 1.1,
-            borderColor: "rgb(192 132 252)",
-            transition: { type: "spring", stiffness: 400 }
-          }}
+          role="button"
+          onClick={scrollToNextSection}
+          className="w-10 h-14 border border-gray-400 rounded-full flex items-center justify-center px-2 cursor-pointer bg-transparent"
+          animate={{ borderColor: ["rgb(156 163 175)", "rgb(56 189 248)", "rgb(156 163 175)"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
+          aria-label="Scroll down"
         >
-          <motion.div
-            className="w-1 h-3 bg-gray-400 rounded-full"
-            animate={{
-              y: [0, 12, 0],
-              backgroundColor: ["rgb(156 163 175)", "rgb(192 132 252)", "rgb(156 163 175)"],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
+          {/* Centered arrow only (no left cyan dot, no white oval) */}
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7C3AED"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-purple-600"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <polyline points="19 12 12 19 5 12" />
+          </motion.svg>
         </motion.div>
+
+        {/* Scroll label under the indicator (old structure) */}
         <motion.span
           className="text-gray-400 text-xs tracking-widest cursor-pointer"
-          animate={{
-            opacity: [0.6, 1, 0.6],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ color: "rgb(192 132 252)" }}
+          onClick={scrollToNextSection}
         >
           Scroll
         </motion.span>
