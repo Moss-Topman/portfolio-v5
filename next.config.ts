@@ -15,3 +15,9 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+const { withSentryConfig } = require('@sentry/nextjs');
+
+module.exports = withSentryConfig({
+  // Your existing config
+  sentry: { hideSourceMaps: true }
+});
