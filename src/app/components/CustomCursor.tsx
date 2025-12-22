@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function CustomCursor() {
   const [mouseX, setMouseX] = useState(0);
@@ -11,19 +12,29 @@ export default function CustomCursor() {
   const [innerY, setInnerY] = useState(0);
   const [isHover, setIsHover] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isOnMainPage, setIsOnMainPage] = useState(true);
+  
+  const pathname = usePathname();
 
-  const speed = 0.12; // Easing speed for outer circle lag
-  const maxOffset = 24; // Max distance inner dot can move from center (px)
-  const snapSpeed = 0.15; // Speed for snapping back to center
+  const speed = 0.12;
+  const maxOffset = 24;
+  const snapSpeed = 0.15;
 
   // Initialize client-side
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Track mouse position
+  // Check if we're on the main page
   useEffect(() => {
     if (!isClient) return;
+    // Only show cursor on main page (home)
+    setIsOnMainPage(pathname === "/");
+  }, [isClient, pathname]);
+
+  // Track mouse position
+  useEffect(() => {
+    if (!isClient || !isOnMainPage) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       setMouseX(e.clientX);
@@ -32,11 +43,11 @@ export default function CustomCursor() {
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isClient]);
+  }, [isClient, isOnMainPage]);
 
   // Animation loop for outer circle easing
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient || !isOnMainPage) return;
 
     let animationFrameId: number;
 
@@ -52,20 +63,15 @@ export default function CustomCursor() {
       });
 
       // Update inner dot position with analog stick effect
-      // Calculate distance from outer circle center to mouse
       setInnerX((prev) => {
         const dx = mouseX - cursorOuterX;
-        // Limit distance to maxOffset (analog stick constraint)
         const limitedDx = Math.max(-maxOffset, Math.min(maxOffset, dx));
-        // Snap back towards center when not moving fast
         return prev + (limitedDx - prev) * snapSpeed;
       });
 
       setInnerY((prev) => {
         const dy = mouseY - cursorOuterY;
-        // Limit distance to maxOffset
         const limitedDy = Math.max(-maxOffset, Math.min(maxOffset, dy));
-        // Snap back towards center
         return prev + (limitedDy - prev) * snapSpeed;
       });
 
@@ -75,11 +81,11 @@ export default function CustomCursor() {
     animationFrameId = requestAnimationFrame(animateCursor);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isClient, mouseX, mouseY, cursorOuterX, cursorOuterY, speed, snapSpeed, maxOffset]);
+  }, [isClient, isOnMainPage, mouseX, mouseY, cursorOuterX, cursorOuterY, speed, snapSpeed, maxOffset]);
 
   // Handle link/button hover
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient || !isOnMainPage) return;
 
     const interactiveElements = document.querySelectorAll("a, button, [role='button']");
 
@@ -97,27 +103,31 @@ export default function CustomCursor() {
         el.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, [isClient]);
+  }, [isClient, isOnMainPage]);
 
-  if (!isClient) return null;
+  if (!isClient || !isOnMainPage) return null;
 
   return (
     <>
-      {/* Outer circle - lagging with easing */}
+      {/* Outer circle - with more linear border */}
       <div
-        className="circle-cursor circle-cursor--outer fixed pointer-events-none z-50 rounded-full border-2 bg-transparent"
+        className="circle-cursor circle-cursor--outer fixed pointer-events-none z-50 rounded-full bg-transparent"
         style={{
           left: `${cursorOuterX}px`,
           top: `${cursorOuterY}px`,
           transform: "translate(-50%, -50%)",
-          transition: isHover ? "border-color 0.2s ease, width 0.2s ease, height 0.2s ease" : "none",
-          borderColor: isHover ? "#a855f7" : "#a855f7",
-          width: isHover ? "48px" : "32px",
-          height: isHover ? "48px" : "32px",
+          transition: "border 0.2s ease, width 0.2s ease, height 0.2s ease",
+          // More linear border: simple 2px solid border without complex styling
+          border: isHover ? "1px solid #ffffff" : "1px solid #ffffff",
+          // Border color using mix-blend-difference for better visibility
+          width: isHover ? "40px" : "24px",
+          height: isHover ? "40px" : "24px",
+          // Use mix-blend-difference for consistent visibility on all backgrounds
+          mixBlendMode: "difference",
         }}
       />
 
-      {/* Inner circle - tracking mouse with snap-back (analog stick effect) */}
+      {/* Inner circle - purple dot */}
       <div
         className="circle-cursor circle-cursor--inner fixed pointer-events-none z-50 rounded-full"
         style={{
@@ -125,9 +135,9 @@ export default function CustomCursor() {
           top: `${cursorOuterY + innerY}px`,
           transform: "translate(-50%, -50%)",
           backgroundColor: "#a855f7",
-          transition: isHover ? "background-color 0.2s ease, width 0.2s ease, height 0.2s ease" : "none",
-          width: isHover ? "12px" : "8px",
-          height: isHover ? "12px" : "8px",
+          transition: "background-color 0.2s ease, width 0.2s ease, height 0.2s ease",
+          width: isHover ? "8px" : "6px",
+          height: isHover ? "8px" : "6px",
         }}
       />
     </>

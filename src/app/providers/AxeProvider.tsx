@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 
 export default function AxeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {

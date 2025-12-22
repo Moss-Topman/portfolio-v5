@@ -5,9 +5,9 @@ import React, { useState, useEffect, Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import VerticalThemeToggle from "./VerticalThemeToggle";
-import ProjectNavBar from "./ProjectNavBar"; // NEW IMPORT
+import ProjectNavBar from "./ProjectNavBar";
 
-// Temporary projects data - MUST BE INCLUDED
+// Temporary projects data
 const tempProjects = [
   {
     slug: 'trend-following-strategy',
@@ -99,7 +99,7 @@ export default function ProjectPage({ params }: Params) {
 // Loading screen component
 function LoadingScreen() {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1A191D] flex items-center justify-center">
+    <div className="min-h-screen bg-white dark:bg-[#252529] flex items-center justify-center">
       <div className="text-center">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-500 mb-4"></div>
         <p className="text-gray-600 dark:text-gray-300">Loading project...</p>
@@ -175,10 +175,9 @@ function ProjectContent({ params }: { params: Promise<{ slug: string }> }) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1A191D] text-gray-900 dark:text-white transition-colors duration-300 relative overflow-hidden">
-
+    <div className="min-h-screen bg-white dark:bg-[#252529] text-gray-900 dark:text-white transition-colors duration-300 relative overflow-hidden">
       
-      {/* NEW NAVBAR - Add this line */}
+      {/* NEW NAVBAR */}
       <ProjectNavBar />
       
       {/* Vertical Theme Toggle */}

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, type Variants } from "framer-motion";
 
 const svgMask = encodeURIComponent(`
   <svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'>
@@ -68,7 +68,7 @@ export default function Hero() {
   const opacity = useTransform(smoothScrollY, [0, 0.5], [1, 0]);
 
   // Animation variants for smooth reveal
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -79,15 +79,10 @@ export default function Hero() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      transition: {
-        type: "spring",
-        damping: 30,
-        stiffness: 200
-      }
+      y: 30
     },
     visible: {
       opacity: 1,
@@ -107,7 +102,6 @@ export default function Hero() {
       id="home"
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Rest of your hero section remains exactly the same... */}
       {/* Parallax Background Layer */}
       <motion.div
         className="absolute inset-0 z-0"

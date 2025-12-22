@@ -2,8 +2,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import NavBar from './NavBar';
-import CustomCursor from './CustomCursor';
+import NavBar from '../../components/NavBar';
+import CustomCursor from '../../components/CustomCursor';
 
 export default function ConditionalComponents() {
   const pathname = usePathname();
