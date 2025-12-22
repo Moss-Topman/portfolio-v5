@@ -16,7 +16,7 @@
   "test:e2e:debug": "playwright test --debug",
   "clean": "rd /s /q .next && rd /s /q node_modules\\.cache",
   "clean:full": "rd /s /q .next && rd /s /q node_modules && npm install",
-  "postinstall": "if [ -z \"$VERCEL\" ]; then playwright install --with-deps; else echo 'Skipping Playwright browser installation on Vercel'; fi"
+  
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
