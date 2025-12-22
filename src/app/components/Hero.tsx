@@ -124,15 +124,15 @@ export default function Hero() {
         style={{ y: foregroundY }}
       >
         <Image
-          src="/assets/hero-poster.jpg"
-          alt="Hero background"
-          fill
-          priority
-          unoptimized
-          className="object-cover"
-          quality={100}
-          sizes="100vw"
-        />
+  src="/assets/hero-poster.jpg"
+  alt="Hero background"
+  fill
+  priority
+  className="object-cover"
+  quality={100}
+  sizes="100vw"
+  loading="eager" // Priority for hero
+/>
       </motion.div>
 
       {/* Bottom gradient overlay fading into the Expertise section color (#252529) */}
