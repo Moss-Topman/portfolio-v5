@@ -14,3 +14,16 @@ jobs:
       - run: npx playwright test
         env:
           CI: true
+
+  lighthouse:
+    needs: test  # Runs only after tests pass
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+      - name: Run Lighthouse CI
+        run: npx lhci autorun --url=https://portfolio-v5-b0wuc9246-moss-topmans-projects.vercel.app/ --minPassing=90

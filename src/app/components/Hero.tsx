@@ -123,7 +123,7 @@ export default function Hero() {
         className="absolute inset-0 z-0"
         style={{ y: foregroundY }}
       >
-        <Image
+<Image
   src="/assets/hero-poster.jpg"
   alt="Hero background"
   fill
@@ -131,7 +131,6 @@ export default function Hero() {
   className="object-cover"
   quality={100}
   sizes="100vw"
-  loading="eager" // Priority for hero
 />
       </motion.div>
 
@@ -158,7 +157,7 @@ export default function Hero() {
           className="text-gray-400 text-center mb-6 text-sm tracking-widest uppercase"
           variants={itemVariants}
         >
-          <motion.span className="mr-4" whileHover={{ scale: 1.05 }}>SOFTWARE</motion.span>
+          <motion.span className="mr-4" whileHover={{ scale: 1.05 }} aria-label="Software">SOFTWARE</motion.span>
           <motion.span className="mr-4" whileHover={{ scale: 1.05 }}>ENGINEER,</motion.span>
           <motion.span className="mr-4" whileHover={{ scale: 1.05 }}>AI</motion.span>
           <motion.span className="mr-4" whileHover={{ scale: 1.05 }}>PROMPT</motion.span>
