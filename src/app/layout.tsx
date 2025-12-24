@@ -1,48 +1,24 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import CustomCursor from "./components/CustomCursor";
-import { Analytics } from '@vercel/analytics/react';
-import ClientWrapper from "./components/ClientWrapper";
+import { Inter, Poppins, Roboto_Mono } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+// Load fonts with next/font (automatically optimizes)
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
-export const metadata: Metadata = {
-  title: "Moss Victor Portfolio",
-  description: "Portfolio of Moss Victor - Software Engineer & AI Prompt Engineer",
-  robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1.0",
+const poppins = Poppins({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
 
-  openGraph: {
-    title: "Moss Victor Portfolio",
-    description: "Software Engineer & AI Prompt Engineer specializing in Next.js, React, and modern web development",
-    type: "website",
-    url: "https://yourdomain.com", // Replace with your actual domain
-    images: [
-      {
-        url: "/og-image.png", // Create this image in your public folder
-        width: 1200,
-        height: 630,
-        alt: "Moss Victor Portfolio Preview",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Moss Victor Portfolio",
-    description: "Software Engineer & AI Prompt Engineer",
-    images: ["/og-image.png"], // Same image for Twitter
-  },
-  keywords: ["Software Engineer", "AI Prompt Engineer", "Frontend Developer", "Next.js", "React", "Portfolio"],
-  authors: [{ name: "Moss Victor" }],
-  creator: "Moss Victor",
-  publisher: "Moss Victor",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-};
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  variable: '--font-roboto-mono',
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -50,18 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${robotoMono.variable} scroll-smooth`}>
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#252529" />
+        {/* REMOVE Google Fonts link if you have it */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} bg-[#1A191D] text-white antialiased`}>
-        {/* Always show CustomCursor on ALL pages */}
-        <CustomCursor />
-        <ClientWrapper>
-          {children}
-        </ClientWrapper>
-        <Analytics />
+      <body className="font-sans antialiased bg-[#1A191D] text-white">
+        {children}
       </body>
     </html>
   );

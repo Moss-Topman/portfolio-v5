@@ -1,0 +1,4 @@
+/* Critical above-the-fold CSS */
+#home { opacity: 1 !important; }
+.text-6xl { font-size: 4.5rem; }
+/* Add minimal essential styles */
