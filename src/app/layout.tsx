@@ -1,39 +1,36 @@
-import { Inter, Poppins, Roboto_Mono } from 'next/font/google';
+'use client';
 
-// Load fonts with next/font (automatically optimizes)
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { usePathname } from 'next/navigation';
+import "./globals.css";
+import NavBar from "./components/NavBar";
+import CustomCursor from "./components/CustomCursor";
 
-const poppins = Poppins({
-  weight: ['400', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
-
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-roboto-mono',
-  display: 'swap',
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isProjectPage = pathname?.startsWith('/projects/');
+
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} ${robotoMono.variable} scroll-smooth`}>
+    <html lang="en">
       <head>
-        {/* REMOVE Google Fonts link if you have it */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <title>Moss Victor Portfolio</title>
+        <meta name="description" content="Portfolio of Moss Victor - Software Engineer & AI Prompt Engineer" />
       </head>
-      <body className="font-sans antialiased bg-[#1A191D] text-white">
-        {children}
+      <body className={`${inter.className} bg-[#1A191D] text-white antialiased`}>
+        {/* Always show CustomCursor on ALL pages */}
+        <CustomCursor />
+        
+        {/* Only show main NavBar on non-project pages */}
+        {!isProjectPage && <NavBar />}
+        
+        <main>{children}</main>
       </body>
     </html>
   );

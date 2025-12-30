@@ -26,6 +26,7 @@
     "@types/three": "^0.181.0",
     "@vercel/analytics": "^1.6.1",
     "autoprefixer": "^10.4.21",
+    "compression": "^1.8.1",
     "framer-motion": "^12.23.24",
     "next": "^15.5.7",
     "postcss": "^8.5.6",
