@@ -1,0 +1,13 @@
+/* Critical above-the-fold styles */
+.bg-\[\#1A191D\] { background-color: #1A191D; }
+.text-white { color: white; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.object-cover { object-fit: cover; }
+.z-0 { z-index: 0; }
+.h-screen { height: 100vh; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.overflow-hidden { overflow: hidden; }

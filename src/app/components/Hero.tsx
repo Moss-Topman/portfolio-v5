@@ -62,10 +62,8 @@ export default function Hero() {
   });
 
   // Parallax layers moving at different speeds
-  const backgroundY = useTransform(smoothScrollY, [0, 1], [0, 100]);
   const foregroundY = useTransform(smoothScrollY, [0, 1], [0, 50]);
   const contentY = useTransform(smoothScrollY, [0, 1], [0, 25]);
-  const opacity = useTransform(smoothScrollY, [0, 0.5], [1, 0]);
 
   // Animation variants for smooth reveal
   const containerVariants: Variants = {
@@ -102,23 +100,7 @@ export default function Hero() {
       id="home"
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Parallax Background Layer */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ y: backgroundY }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(rgba(26, 25, 29, 0.3), rgba(26, 25, 29, 0.3)), linear-gradient(to bottom, transparent 60%, #252529 100%), url('/assets/hero-poster.jpg')`,
-            backgroundSize: 'cover, cover, cover',
-            backgroundPosition: 'center, center, center',
-            backgroundBlendMode: 'normal, normal, normal',
-          }}
-        />
-      </motion.div>
-
-      {/* Hero image */}
+      {/* Optimized Hero image – single source of truth, no duplicate background */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{ y: foregroundY }}
@@ -128,9 +110,8 @@ export default function Hero() {
           alt="Hero background"
           fill
           priority
-          unoptimized
+          quality={85}
           className="object-cover"
-          quality={100}
           sizes="100vw"
         />
       </motion.div>
@@ -217,7 +198,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Enhanced Scroll Indicator - static in hero section only */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div
         className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 z-40 ${
           showScrollIndicator ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -226,7 +207,6 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
       >
-        {/* Old structure: rounded tall container holding the two redesigned elements */}
         <motion.div
           role="button"
           onClick={scrollToNextSection}
@@ -237,7 +217,6 @@ export default function Hero() {
           whileTap={{ scale: 0.98 }}
           aria-label="Scroll down"
         >
-          {/* Centered arrow only (no left cyan dot, no white oval) */}
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -257,7 +236,6 @@ export default function Hero() {
           </motion.svg>
         </motion.div>
 
-        {/* Scroll label under the indicator (old structure) */}
         <motion.span
           className="text-gray-400 text-xs tracking-widest cursor-pointer"
           animate={{ opacity: [0.6, 1, 0.6] }}

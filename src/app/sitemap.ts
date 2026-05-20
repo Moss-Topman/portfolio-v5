@@ -1,38 +1,59 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://portfolio-v5-b0wuc9246-moss-topmans-projects.vercel.app';
-  
+  const baseUrl = "https://useatlasdemand.com";
+  const lastModified = new Date();
+
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      lastModified,
+      changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/#expertise`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      url: `${baseUrl}/projects/trend-following-strategy`,
+      lastModified,
+      changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/projects/trend-rider`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/projects/trend-rider-v2`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    // Anchor links are not standard; search engines generally ignore them,
+    // but if you want to keep them:
+    {
+      url: `${baseUrl}/#expertise`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/#work`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/#experience`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
   ];
 }

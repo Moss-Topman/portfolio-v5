@@ -6,11 +6,12 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[#252529] text-white antialiased; /* Unified dark gray bg */
+  @apply bg-[#252529] text-white antialiased;
+  position: relative; /* Fix CustomCursor position warning */
 }
 
 html {
-  scroll-behavior: smooth; /* Smooth scroll */
+  scroll-behavior: smooth;
 }
 
 /* Dot pattern background like tamalsen.dev */
@@ -594,8 +595,6 @@ html {
   pointer-events: none;
 }
 
-
-
 /* Custom Cursor for Project Pages */
 .cursor-none {
   cursor: none;
@@ -617,6 +616,7 @@ html {
   font-size: 12px;
   font-weight: 500;
 }
+
 :focus-visible {
   outline: 2px solid #8b5cf6;
   outline-offset: 2px;
