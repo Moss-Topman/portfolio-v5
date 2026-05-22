@@ -84,7 +84,7 @@ export default function Hero() {
         id="home"
         className="relative h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Optimised Hero image */}
+        {/* Optimised Hero image – now using WebP */}
         <m.div className="absolute inset-0 z-0" style={{ y: foregroundY }}>
           <Image
             src="/assets/hero-poster.webp"

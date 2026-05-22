@@ -90,10 +90,17 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        {/* Preload hero image – starts download immediately */}
+        <link
+          rel="preload"
+          as="image"
+          href="/assets/hero-poster.webp"
+          imageSrcSet="/assets/hero-poster.webp?w=1920&q=85 1x, /assets/hero-poster.webp?w=2560&q=85 2x"
+          imageSizes="100vw"
+        />
       </head>
       <body className={`${inter.className} bg-[#1A191D] text-white antialiased`}>
         <ClientLayout>{children}</ClientLayout>
-        {/* Scripts component removed – eliminates 404 and saves a network request */}
       </body>
     </html>
   );
