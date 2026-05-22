@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./components/ClientLayout";
-import Scripts from "./components/Scripts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -92,11 +91,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body
-        className={`${inter.className} bg-[#1A191D] text-white antialiased`}
-      >
+      <body className={`${inter.className} bg-[#1A191D] text-white antialiased`}>
         <ClientLayout>{children}</ClientLayout>
-        <Scripts />
+        {/* Scripts component removed – eliminates 404 and saves a network request */}
       </body>
     </html>
   );
