@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { poppins, robotoMono } from "./fonts";
 import "./globals.css";
 import ClientLayout from "./components/ClientLayout";
 
@@ -78,7 +79,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${robotoMono.variable}`}>
       <head>
         <script
           type="application/ld+json"
