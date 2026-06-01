@@ -85,13 +85,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        {/* No manual preload — Next.js <Image priority> handles this correctly */}
+        {/* Preconnects removed — fonts are self-hosted via next/font, no external requests needed */}
       </head>
       <body className={`${inter.className} bg-[#1A191D] text-white antialiased`}>
         <ClientLayout>{children}</ClientLayout>
