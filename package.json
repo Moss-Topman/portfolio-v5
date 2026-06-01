@@ -57,8 +57,10 @@
     "glob": "^10.3.10",
     "inflight": "npm:lru-cache@^10.2.0"
   },
-  "browserslist": [
-    "last 2 versions",
-    "not dead"
-  ]
+ "browserslist": [
+  "chrome >= 109",
+  "firefox >= 109",
+  "safari >= 15.6",
+  "edge >= 109"
+]
 }
